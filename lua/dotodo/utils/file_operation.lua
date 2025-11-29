@@ -52,11 +52,6 @@ end
 
 ---A function to read the current TODO.md file in the root of the project.
 ---@param opts any
-M.read_todo_file = function(opts)
-	opts = opts or {}
-	local todo_file_path = find_file()
-	return M.read_file_content(todo_file_path)
-end
 
 M.find_todos_in_file = function(path)
 	local content = M.read_file_content(path)
@@ -70,7 +65,20 @@ M.find_todos_in_file = function(path)
 		end
 	end
 
-  return TODOs
+	return TODOs
+end
+
+-- TODO: aitalno
+M.read_todo_file = function(opts)
+	opts = opts or {}
+	local todo_file_path = ""
+	if opts.no_file == true then
+		todo_file_path = vim.api.nvim_buf_get_name(0)
+    return M.find_todos_in_file(todo_file_path)
+	else
+		todo_file_path = find_file()
+	  return M.read_file_content(todo_file_path)
+	end
 end
 
 return M
