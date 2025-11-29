@@ -1,6 +1,7 @@
 local M = {}
 
 local window = require("dotodo.ui.window")
+local file_operation = require("dotodo.utils.file_operation")
 local configuration = require("dotodo.utils.configuration")
 local default_configuration = configuration.configuration.default_configuration
 local default_window_configuration = default_configuration.window_configuration
@@ -12,9 +13,12 @@ local default_window_configuration = default_configuration.window_configuration
 M.create_window = function(opts)
   opts = opts or {}
   opts.window_configuration = opts.window_configuration or default_window_configuration
-	window.create_todo_list_window({
+  opts.file_content = opts.file_content or {}
+	local buffer, win = window.create_todo_list_window({
 		window_configuration = opts.window_configuration,
+    file_content = file_operation.read_file()
 	})
+
 end
 
 return M

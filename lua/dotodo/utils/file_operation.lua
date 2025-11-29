@@ -15,8 +15,6 @@ local find_file = function()
 
 		local current_file_path = vim.fs.root(0, root_dir)
 
-		-- TODO: Later I should be able to change the TODO file name that I'm searchingo for....
-		-- I should be able to let the user change it...
 		local current_doto_file_path = vim.fs.find({
 			"TODO.md",
 			"todo.md",
@@ -34,7 +32,7 @@ end
 M.read_file = function(opts)
 	opts = opts or {}
 
-  local todo_file_path = find_file()
+	local todo_file_path = find_file()
 
 	-- Let's open the file...
 	local file_content_bufnr = vim.uv.fs_open(todo_file_path, "r", 438, nil)
@@ -46,4 +44,5 @@ M.read_file = function(opts)
 end
 
 M.read_file()
+
 return M
