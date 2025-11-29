@@ -4,7 +4,7 @@ local configuration = require("dotodo.utils.configuration")
 local default_root_dir = configuration.configuration.default_configuration.root_dir
 
 ---A function to find the TODO.md file in the root of the project.
----@return string|nil
+---@return string
 local find_file = function()
 	local todo_file_path = nil
 
@@ -38,11 +38,9 @@ M.read_file = function(opts)
 	local file_content_bufnr = vim.uv.fs_open(todo_file_path, "r", 438, nil)
 
 	local file_content = vim.uv.fs_read(file_content_bufnr, vim.uv.fs_stat(todo_file_path).size, 0)
-	print(file_content)
 
 	vim.uv.fs_close(file_content_bufnr)
+  return file_content
 end
-
-M.read_file()
 
 return M

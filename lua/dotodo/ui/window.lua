@@ -6,11 +6,17 @@ local M = {}
 M.create_todo_list_window = function(opts)
   opts = opts or {}
   opts.window_configuration = opts.window_configuration or {}
-  opts.file_content = opts.file_content or {}
+
+  local lines = {}
+
+  for line in opts.file_content:gmatch("([^\n]*)\n?") do
+    table.insert(lines, line)
+  end
+
 
 	local buffer = vim.api.nvim_create_buf(true, false)
 	local win = vim.api.nvim_open_win(buffer, false, opts.window_configuration)
-  vim.api.nvim_buf_set_lines(buffer, 0, -1, false, opts.file_content)
+  vim.api.nvim_buf_set_lines(buffer, 0, -1, false, lines)
 
 	vim.api.nvim_set_current_win(win)
   vim.opt_local.number = true
@@ -18,5 +24,6 @@ M.create_todo_list_window = function(opts)
   vim.opt_local.modifiable = false
   return buffer, win
 end
+
 
 return M

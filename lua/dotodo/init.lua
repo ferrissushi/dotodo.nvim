@@ -13,12 +13,14 @@ local default_window_configuration = default_configuration.window_configuration
 M.create_window = function(opts)
   opts = opts or {}
   opts.window_configuration = opts.window_configuration or default_window_configuration
-  opts.file_content = opts.file_content or {}
+
+
 	local buffer, win = window.create_todo_list_window({
 		window_configuration = opts.window_configuration,
-    file_content = file_operation.read_file()
+	   file_content = file_operation.read_file()
 	})
 
 end
 
+M.create_window()
 return M
