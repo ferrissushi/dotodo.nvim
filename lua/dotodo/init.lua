@@ -1,14 +1,16 @@
 local M = {}
 
--- So here I just tried to open a basic window...........
--- Let's import it...
 local window = require("dotodo.ui.window")
+local configuration = require("dotodo.utils.configuration")
+local default_configuration = configuration.configuration.default_configuration
+local default_window_configuration = default_configuration.window_configuration
 
--- Here I just tried to open a new basic plugnis
-
-M.create_window = function()
+--- A function to create the main window
+M.create_window = function(opts)
+  opts = opts or {}
+  opts.window_configuration = opts.window_configuration or default_window_configuration
 	window.create_todo_list_window({
-		window_configuration = configuration,
+		window_configuration = opts.window_configuration,
 	})
 end
 
