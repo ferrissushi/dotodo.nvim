@@ -2,6 +2,9 @@ local M = {}
 
 M.configuration = {
 	default_configuration = {
+    root_dir = {
+      ".git",
+    },
 		window_configuration = {
 			relative = "editor",
 			row = math.floor(math.floor(vim.o.lines / 2) / 2),
