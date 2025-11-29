@@ -17,7 +17,7 @@ M.create_window = function(opts)
 
 	local buffer, win = window.create_todo_list_window({
 		window_configuration = opts.window_configuration,
-	   file_content = file_operation.read_file()
+	   file_content = file_operation.read_todo_file()
 	})
 
 end

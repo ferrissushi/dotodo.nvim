@@ -29,7 +29,7 @@ end
 
 ---A function to read the current TODO.md file in the root of the project.
 ---@param opts any
-M.read_file = function(opts)
+M.read_todo_file = function(opts)
 	opts = opts or {}
 
 	local todo_file_path = find_file()

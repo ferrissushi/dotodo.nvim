@@ -13,7 +13,6 @@ M.create_todo_list_window = function(opts)
     table.insert(lines, line)
   end
 
-
 	local buffer = vim.api.nvim_create_buf(true, false)
 	local win = vim.api.nvim_open_win(buffer, false, opts.window_configuration)
   vim.api.nvim_buf_set_lines(buffer, 0, -1, false, lines)
