@@ -52,7 +52,7 @@ end
 
 ---A function to read the current TODO.md file in the root of the project.
 ---@param opts any
-
+-- TODO:
 M.find_todos_in_file = function(path)
 	local content = M.read_file_content(path)
 	local lines = utils.split_file_content(content)
