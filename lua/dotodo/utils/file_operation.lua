@@ -57,15 +57,18 @@ M.find_todos_in_file = function(path)
 	local content = M.read_file_content(path)
 	local lines = utils.split_file_content(content)
 	local TODOs = {}
-  -- TODO: Use regex instead but I still don't know how to do it with lua
-  -- User should be able to customize it...
-  local recurences = {"-- TODO", "--TODO"}
+	-- TODO: Use regex instead but I still don't know how to do it with lua
+	-- User should be able to customize it...
+	local recurences = { "^%s*%-%-TODO", "^%s*%-%- TODO" }
 
 	for _, line in pairs(lines) do
 		local contains_todo
-    for _, recurence in pairs(recurences) do
-      contains_todo = line:find(recurence)
-    end
+		for _, recurence in pairs(recurences) do
+			if line:find(recurence) then
+				contains_todo = line:find(recurence)
+				break
+			end
+		end
 		if contains_todo ~= nil then
 			table.insert(TODOs, line)
 		end
@@ -74,16 +77,18 @@ M.find_todos_in_file = function(path)
 	return TODOs
 end
 
+local todos = M.find_todos_in_file(vim.uv.cwd() .. "/lua/dotodo/utils/file_operation.lua")
+
 -- TODO: aitalno
 M.read_todo_file = function(opts)
 	opts = opts or {}
 	local todo_file_path = ""
 	if opts.no_file == true then
 		todo_file_path = vim.api.nvim_buf_get_name(0)
-    return M.find_todos_in_file(todo_file_path)
+		return M.find_todos_in_file(todo_file_path)
 	else
 		todo_file_path = find_file()
-	  return M.read_file_content(todo_file_path)
+		return M.read_file_content(todo_file_path)
 	end
 end
 
