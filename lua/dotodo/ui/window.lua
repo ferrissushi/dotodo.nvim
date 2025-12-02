@@ -9,9 +9,13 @@ local utils = require("dotodo.utils.utils")
 M.create_todo_list_window = function(opts)
 	opts = opts or {}
 	opts.window_configuration = opts.window_configuration or {}
+	local lines
 
-  local lines = opts.file_content
-	-- local lines = utils.split_file_content(opts.file_content)
+	if type(opts.file_content) == "string" then
+		lines = utils.split_file_content(opts.file_content)
+	else
+		lines = opts.file_content
+	end
 
 	local buffer = vim.api.nvim_create_buf(true, false)
 	local win = vim.api.nvim_open_win(buffer, false, opts.window_configuration)
