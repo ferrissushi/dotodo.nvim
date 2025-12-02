@@ -57,9 +57,15 @@ M.find_todos_in_file = function(path)
 	local content = M.read_file_content(path)
 	local lines = utils.split_file_content(content)
 	local TODOs = {}
+  -- TODO: Use regex instead but I still don't know how to do it with lua
+  -- User should be able to customize it...
+  local recurences = {"-- TODO", "--TODO"}
 
 	for _, line in pairs(lines) do
-		local contains_todo = string.find(line, "TODO")
+		local contains_todo
+    for _, recurence in pairs(recurences) do
+      contains_todo = line:find(recurence)
+    end
 		if contains_todo ~= nil then
 			table.insert(TODOs, line)
 		end
