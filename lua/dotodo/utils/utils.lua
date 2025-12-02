@@ -6,6 +6,7 @@ local M = {}
 M.ltrim = function(s)
   return s:match("^%s*(.-)$")
 end
+
 ---function to split a file content by row
 ---@param content string
 ---@return string[]
