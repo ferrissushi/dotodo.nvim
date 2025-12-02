@@ -70,14 +70,12 @@ M.find_todos_in_file = function(path)
 			end
 		end
 		if contains_todo ~= nil then
-			table.insert(TODOs, line)
+			table.insert(TODOs, utils.ltrim(line))
 		end
 	end
 
 	return TODOs
 end
-
-local todos = M.find_todos_in_file(vim.uv.cwd() .. "/lua/dotodo/utils/file_operation.lua")
 
 -- TODO: aitalno
 M.read_todo_file = function(opts)
